@@ -1,10 +1,12 @@
 import type { NextPage } from 'next'
+import PageTitle from "@ui/components/PageTitle";
+import Header from "@ui/components/Header";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <h1>Make Me Pizza</h1>
-    </div>
+    <Header>
+      <PageTitle>Peça sua Pizza</PageTitle>
+    </Header>
   )
 }
 

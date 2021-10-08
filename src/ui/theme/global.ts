@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import colors from "@ui/theme/colors";
 
 export default createGlobalStyle`
   * {
@@ -18,6 +19,7 @@ export default createGlobalStyle`
     width: 100vw;
     height: 100vh;
     scroll-behavior: smooth;
+    background: ${colors.background};
   }
 
   body {
