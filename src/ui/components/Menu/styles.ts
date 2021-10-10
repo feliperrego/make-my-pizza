@@ -60,6 +60,7 @@ export const StyledLink = styled.a`
 
   &:hover {
     transform: scale(1.02);
+    color: ${colors.primary};
   }
 
   &:active {
