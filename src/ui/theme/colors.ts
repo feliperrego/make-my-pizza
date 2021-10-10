@@ -1,5 +1,6 @@
 export default {
-  text: '#333333',
+  primary: '#333333',
+  secondary: '#bdbdbd',
   lightText: '#FFFFFF',
   background: '#F7F7F7'
 }

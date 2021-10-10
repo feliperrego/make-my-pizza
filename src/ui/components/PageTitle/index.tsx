@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import fonts from "@ui/theme/fonts";
 import colors from "@ui/theme/colors";
 
@@ -8,7 +8,7 @@ export interface TitleProps {
 }
 
 const PageTitle = styled.h1<TitleProps>`
-  color: ${colors.text};
+  color: ${colors.primary};
   font-family: ${fonts.publicSans};
   font-size: ${({ size }) => size || 92}px;
   font-weight: 700;

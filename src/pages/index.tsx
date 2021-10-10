@@ -1,12 +1,30 @@
 import type { NextPage } from 'next'
-import PageTitle from "@ui/components/PageTitle";
-import Header from "@ui/components/Header";
+import Layout from "@ui/components/Layout";
+import Menu from "@ui/components/Menu";
+import pizza from '@assets/../../public/pizzas/pizza5.png';
 
 const Home: NextPage = () => {
+  const menuItems = [
+    {
+      title: 'montar pedido',
+      href: '/montar-pedido'
+    },
+    {
+      title: 'pedir pizza do dia',
+      href: '/montar-pedido',
+      extraInfo: ['marguerita', 'tamanho médio', 'massa fina']
+    },
+  ];
+
   return (
-    <Header>
-      <PageTitle>Peça sua Pizza</PageTitle>
-    </Header>
+    <>
+      <Layout
+        title="Peça sua Pizza"
+        backgroundImage={pizza}
+      >
+        <Menu menuItems={menuItems}/>
+      </Layout>
+    </>
   )
 }
 
