@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import fonts from "@ui/theme/fonts";
-import colors from "@ui/theme/colors";
+import fonts from '@ui/theme/fonts';
+import colors from '@ui/theme/colors';
 
 export type MenuType = 'default' | 'pick';
 
@@ -35,7 +35,7 @@ export const MenuList = styled.ul`
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
-  width: max(32%, 360px);
+  width: max(35%, 360px);
 `;
 
 export const MenuItem = styled.li`
