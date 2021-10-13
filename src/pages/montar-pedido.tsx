@@ -82,7 +82,7 @@ const MontarPedido: NextPage = () => {
   }, [orderData]);
 
   return (
-    <Layout title="Monte sua Pizza">
+    <Layout title="Monte sua Pizza" backButton>
       {!router.query.step && (
         <>
           <Menu

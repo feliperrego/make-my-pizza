@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { NextPage } from 'next';
 import Layout from '@ui/components/Layout';
 import Menu from '@ui/components/Menu';
@@ -33,6 +33,11 @@ const Home: NextPage = () => {
       });
     }
   };
+
+  useEffect(() => {
+    handleStep('');
+    handleOrderData({});
+  }, []);
 
   return (
     <Layout

@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components';
+import Button from '@ui/components/Button';
+import colors from '@ui/theme/colors';
 
 interface ContainerProps {
   backgroundImage?: StaticImageData;
@@ -29,5 +31,20 @@ export const Main = styled.main`
 
   @media(max-width: 768px) {
     flex-direction: column;
+  }
+`;
+
+export const BackButton = styled(Button)`
+  background: transparent;
+  color: ${colors.primary};
+  font-size: 15px;
+  text-transform: uppercase;
+  
+  &:hover {
+   opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 1;
   }
 `;
