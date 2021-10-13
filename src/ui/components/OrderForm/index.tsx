@@ -6,11 +6,17 @@ import Button from '@ui/components/Button';
 import Form from '../Form';
 import { OrderFormContainer } from './styles';
 
-const OrderForm: React.FC = () => {
+interface OrderFormProps {
+  onSubmit?: (values: any) => void;
+}
+
+const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit: SubmitHandler = async (values) => {
-    console.log(values);
+    if (onSubmit) {
+      onSubmit(values);
+    }
   };
 
   return (

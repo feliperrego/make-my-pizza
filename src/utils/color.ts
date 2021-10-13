@@ -1,6 +1,6 @@
 import colors from '@ui/theme/colors';
 
-export default (currentColor: string, defaultColor = '#ffffff'): string => {
+export const getColor = (currentColor: string, defaultColor = '#ffffff'): string => {
   let color;
 
   try {

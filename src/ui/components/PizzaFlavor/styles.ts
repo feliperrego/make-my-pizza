@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
-import Image from 'next/image';
-import fonts from "@ui/theme/fonts";
-import colors from "@ui/theme/colors";
+import fonts from '@ui/theme/fonts';
+import colors from '@ui/theme/colors';
 
 export const PizzaFlavorContainer = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
 `;
 
 export const PizzaList = styled.div`
@@ -21,7 +20,6 @@ export const PizzaList = styled.div`
 `;
 
 interface PizzaOptionProps {
-  invert?: boolean;
   inactive?: boolean;
 }
 
@@ -34,11 +32,6 @@ export const PizzaOption = styled.div<PizzaOptionProps>`
   align-items: center;
   margin: 0 10px 60px;
   cursor: pointer;
-
-  ${({ invert }) => invert && css`
-    margin: 0 10px 0;
-    flex-direction: column-reverse;
-  `}
   
   &:hover {
     img { transform: rotate(-4deg); }
@@ -48,21 +41,40 @@ export const PizzaOption = styled.div<PizzaOptionProps>`
   ${({ inactive }) => inactive && css`
     opacity: 0.5;
     filter: grayscale(1);
-  `}
+  `};
+  
+  @media(max-width: 960px) {
+    width: 100px;
+    height: 100px;
+    margin: 0 40px 60px;
+  }
+
+  @media(max-width: 768px) {
+    width: 80px;
+    height: 80px;
+    margin: 0 40px 60px;
+  }
+
+  @media(max-width: 425px) {
+    margin: 0 20px 40px;
+  }
 `;
 
 export const PizzaName = styled.span`
   font-family: ${fonts.publicSans};
   color: ${colors.primary};
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
   text-transform: lowercase;
   letter-spacing: -2px;
   text-align: center;
+
+  @media(max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const PizzaImage = styled.img`
   filter: drop-shadow(0 8px 0.75rem #666);
   width: 100%;
 `;
-

@@ -55,7 +55,7 @@ export const getPrice = (pizzaValues: PizzaOptions): Promise<{ value: number }> 
   } as any;
 
   const value = Object.keys(pizzaValues)
-    .map((option) => pricesTable[option].find((e) => e.options.includes((pizzaValues as any)[option])))
+    .map((option) => pricesTable[option].find((e: any) => e.options.includes((pizzaValues as any)[option])))
     .map((price) => price.value)
     .reduce((a, b) => a + b);
 

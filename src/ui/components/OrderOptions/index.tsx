@@ -1,5 +1,5 @@
 import React from 'react';
-import currencyFormat from '@utils/currencyFormat';
+import { currencyFormat } from '@utils/currency';
 import { OrderOptionsContainer, OrderValue, OrderPaymentMethod } from './styles';
 
 interface OrderOptionsProps {

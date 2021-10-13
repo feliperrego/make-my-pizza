@@ -21,4 +21,8 @@ export const Container = styled.div<ContainerProps>`
 export const Main = styled.main`
   flex: 1;
   display: flex;
+
+  @media(max-width: 768px) {
+    flex-direction: column;
+  }
 `;

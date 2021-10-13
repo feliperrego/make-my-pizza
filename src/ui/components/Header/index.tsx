@@ -1,7 +1,10 @@
-import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default styled.header`
-  margin: 60px 0 0 60px;
+  padding: 60px 30px 30px 60px;
   width: 100%;
+
+  @media(max-width: 425px) {
+    padding: 40px 30px 30px 40px;
+  }
 `;

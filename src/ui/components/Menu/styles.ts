@@ -5,27 +5,45 @@ import colors from '@ui/theme/colors';
 export type MenuType = 'default' | 'pick';
 
 interface MenuContainerProps {
-  menuType: MenuType
+  menuType: MenuType;
 }
 
 export const MenuContainer = styled.nav<MenuContainerProps>`
   height: 100%;
-  
+
   ${({ menuType }) => menuType === 'pick' && css`
     ul {
       justify-content: center;
-      margin-left: 60px;
+      padding-left: 60px;
     }
-    
+
     li {
       margin: 10px 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      
+      div[class*=ExtraInfo] {
+        margin-left: 20px;
+      }
     }
-    
+
     a {
       border: none;
       justify-content: flex-start;
       font-weight: 200;
       color: ${colors.secondary};
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      height: auto;
+    }
+    
+    @media(max-width: 425px) {
+      ul {
+        padding-left: 40px;
+      }
     }
   `}
 `;
@@ -36,13 +54,47 @@ export const MenuList = styled.ul`
   justify-content: space-evenly;
   height: 100%;
   width: max(35%, 360px);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media (max-width: 425px) {
+    width: 100%;
+  }
 `;
 
-export const MenuItem = styled.li`
+interface MenuItemProps {
+  active?: boolean;
+  disabled?: boolean;
+}
+
+export const MenuItem = styled.li<MenuItemProps>`
   list-style: none;
   width: 100%;
   text-align: right;
-  min-width: 350px;
+  //min-width: 350px;
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+
+  ${({ active }) => active && css`
+    a {
+      font-weight: 400;
+      opacity: 1;
+      color: ${colors.primary};
+    }
+
+    div[class*=ExtraInfo] span {
+      color: ${colors.primary};
+    }
+  `};
+
+  @media (max-width: 768px) {
+    display: none;
+
+    ${({ active }) => active && css`
+      display: block !important;
+    `};
+  }
 `;
 
 export const StyledLink = styled.a`
@@ -56,30 +108,31 @@ export const StyledLink = styled.a`
   width: 100%;
   border-bottom: 1px solid;
   justify-content: flex-end;
-  padding-bottom: 10px;
+  cursor: pointer;
 
   &:hover {
-    transform: scale(1.02);
     color: ${colors.primary};
   }
 
   &:active {
     color: ${colors.secondary};
   }
+
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
 `;
 
 export const ExtraInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
 `;
 
 export const ExtraInfoItem = styled.span`
-  color: ${colors.primary};
+  color: ${colors.secondary};
   font-family: ${fonts.publicSans};
   font-size: 42px;
   font-weight: 700;
-  text-transform: lowercase;
   letter-spacing: -2px;
   margin-top: 5px;
 `;

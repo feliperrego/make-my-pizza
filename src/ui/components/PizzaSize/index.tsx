@@ -1,23 +1,36 @@
 import React from 'react';
 import { PizzaSizeContainer, Sizes, Size } from './styles';
 
-export interface PizzaSizeProps {
-  onSelect?: (selection: string) => void;
+export interface SizeOption {
+  id: string;
+  name: string;
 }
 
-const PizzaSize: React.FC<PizzaSizeProps> = ({ onSelect }) => {
-  const handleSelect = (selection: string) => {
+export interface PizzaSizeProps {
+  onSelect?: (value: {size: string}) => void;
+  options: SizeOption[];
+}
+
+const PizzaSize: React.FC<PizzaSizeProps> = ({ onSelect, options }) => {
+  const handleSelect = (size: string) => {
     if (onSelect) {
-      onSelect(selection);
+      onSelect({ size });
     }
   };
 
   return (
     <PizzaSizeContainer>
       <Sizes>
-        <Size size="p" adjust onClick={() => handleSelect('p')}>p</Size>
-        <Size size="m" onClick={() => handleSelect('m')}>m</Size>
-        <Size size="g" onClick={() => handleSelect('g')}>g</Size>
+        {options?.map((option, index) => (
+          <Size
+            key={option.id}
+            size={option.id}
+            onClick={() => handleSelect(option.name)}
+            adjust={index === 0}
+          >
+            {option.name}
+          </Size>
+        ))}
       </Sizes>
     </PizzaSizeContainer>
   );

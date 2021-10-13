@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import colors from '@ui/theme/colors';
-import getColor from '@utils//getColor';
+import { getColor } from '@utils/color';
 import fonts from '@ui/theme/fonts';
 import { ButtonHTMLAttributes } from 'react';
 

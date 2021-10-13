@@ -11,17 +11,12 @@ export interface PizzaOption {
 }
 
 interface PizzaFlavor {
-  options: PizzaOption[]
+  options: PizzaOption[],
+  onSelect?: (value: {flavor: string}) => void;
 }
 
-const PizzaFlavor: React.FC<PizzaFlavor> = ({ options }) => {
+const PizzaFlavor: React.FC<PizzaFlavor> = ({ options, onSelect }) => {
   const [inactive, setInactive] = useState<string[]>([]);
-
-  const isInverted = (key: number): boolean => {
-    const { length } = options;
-    const middle = Math.ceil(length / 2);
-    return key >= middle;
-  };
 
   const activate = (id: string) => {
     const inactivePizzas = options.filter((pizza) => pizza.id !== id);
@@ -30,19 +25,25 @@ const PizzaFlavor: React.FC<PizzaFlavor> = ({ options }) => {
 
   const isInactive = (id: string): boolean => inactive.includes(id);
 
+  const handleSelect = (flavor: string) => {
+    if (onSelect) {
+      onSelect({ flavor });
+    }
+  };
+
   return (
     <PizzaFlavorContainer>
       <PizzaList>
-        {options?.map((pizza, key) => (
+        {options?.map((pizza) => (
           <PizzaOption
             key={pizza.id}
-            invert={isInverted(key)}
             onMouseEnter={() => activate(pizza.id)}
             onMouseLeave={() => setInactive([])}
             inactive={isInactive(pizza.id)}
+            onClick={() => handleSelect(pizza.name)}
           >
-            <PizzaName>{pizza.name}</PizzaName>
             <PizzaImage src={pizza.img} />
+            <PizzaName>{pizza.name}</PizzaName>
           </PizzaOption>
         ))}
       </PizzaList>

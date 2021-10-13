@@ -3,31 +3,39 @@ import {
   PizzaDoughContainer, Dough, DoughName, DoughLine,
 } from './styles';
 
-export interface PizzaDoughProps {
-  onSelect?: (selection: string) => void;
+export interface DoughOption {
+  id: string;
+  name: string;
 }
 
-const PizzaDough: React.FC<PizzaDoughProps> = ({ onSelect }) => {
-  const handleSelect = (selection: string) => {
+export interface PizzaDoughProps {
+  onSelect?: (value: {dough: string}) => void;
+  options: DoughOption[];
+}
+
+const PizzaDough: React.FC<PizzaDoughProps> = ({ onSelect, options }) => {
+  const handleSelect = (dough: string) => {
     if (onSelect) {
-      onSelect(selection);
+      onSelect({ dough });
     }
   };
 
   return (
     <PizzaDoughContainer>
-      <Dough type="thick" onClick={() => handleSelect('thick')}>
-        <DoughName>Massa Grossa</DoughName>
-        <DoughLine />
-      </Dough>
-      <Dough type="default" onClick={() => handleSelect('default')}>
-        <DoughName>Massa média</DoughName>
-        <DoughLine />
-      </Dough>
-      <Dough type="thin" onClick={() => handleSelect('thin')}>
-        <DoughName>Massa fina</DoughName>
-        <DoughLine />
-      </Dough>
+      {options?.map((option) => (
+        <Dough
+          key={option.id}
+          type={option.id}
+          onClick={() => handleSelect(option.name)}
+        >
+          <DoughName>
+            Massa
+            {' '}
+            {option.name}
+          </DoughName>
+          <DoughLine />
+        </Dough>
+      ))}
     </PizzaDoughContainer>
   );
 };
