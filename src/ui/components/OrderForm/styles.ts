@@ -6,5 +6,9 @@ export const OrderFormContainer = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  padding: 20px;
+  padding: 60px;
+
+  @media (max-width: 425px) {
+    padding: 40px;
+  }
 `;

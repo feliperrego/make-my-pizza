@@ -26,6 +26,14 @@ export const PizzaDoughContainer = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 20px;
+
+  @media(max-width: 768px) {
+    padding: 0 60px;
+  }
+
+  @media(max-width: 425px) {
+    padding: 0 40px;
+  }
 `;
 
 interface DoughProps {
@@ -40,22 +48,41 @@ export const Dough = styled.div<DoughProps>`
   max-width: 600px;
   margin-bottom: 30px;
   cursor: pointer;
+  padding: 20px 0;
   
   &:hover {
     transform: scale(1.02);
   }
   
-  ${({ type }) => getDoughTypeCss(type)}
+  ${({ type }) => getDoughTypeCss(type)};
+  
+  @media(max-width: 768px) {
+    max-width: none;
+  }
 `;
 
 export const DoughName = styled.span`
   font-family: ${fonts.publicSans};
   font-size: 50px;
   margin-right: 20px;
+
+  @media (max-width: 960px) {
+    font-size: 40px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
+
+  @media(max-width: 425px) {
+    font-size: 25px;
+  }
 `;
 
 export const DoughLine = styled.div`
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
   height: 5px;
   background: black;
+  flex: 1;
 `;

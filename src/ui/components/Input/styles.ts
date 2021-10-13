@@ -17,10 +17,6 @@ export const InputGroup = styled.div`
   justify-content: center;
   margin-bottom: 20px;
 
-  @media(max-width: 768px) {
-    align-items: center;
-  }
-
   &:last-of-type {
     margin-bottom: 0;
   }

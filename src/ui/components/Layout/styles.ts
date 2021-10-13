@@ -15,7 +15,12 @@ export const Container = styled.div<ContainerProps>`
     background-size: 50% auto;
     background-position-x: right;
     background-position-y: bottom;
+
+    @media(max-width: 768px) {
+      background-image: none;
+    }
   `}
+  
 `;
 
 export const Main = styled.main`

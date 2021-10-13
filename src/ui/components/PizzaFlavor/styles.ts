@@ -8,6 +8,10 @@ export const PizzaFlavorContainer = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+  
+  @media(max-width: 768px) {
+    padding: 50px 0;
+  }
 `;
 
 export const PizzaList = styled.div`

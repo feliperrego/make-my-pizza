@@ -29,4 +29,8 @@ export default styled(Form)<FormProps>`
   button {
     margin-top: 43px;
   }
+  
+  @media(max-width: 769px) {
+    max-width: none;
+  }
 `;

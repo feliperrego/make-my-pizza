@@ -68,7 +68,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
         <Input
           name="address"
           placeholder="Endereço"
-          autoFocus
         />
 
         <OrderOptions value={totalValue} />

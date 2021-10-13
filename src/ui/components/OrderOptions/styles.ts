@@ -14,6 +14,10 @@ export const OrderValue = styled.div`
   font-family: ${fonts.publicSans};
   font-weight: 700;
   letter-spacing: -2px;
+
+  @media (max-width: 425px) {
+    font-size: 20px;
+  }
 `;
 
 export const OrderPaymentMethod = styled.div`
@@ -21,9 +25,14 @@ export const OrderPaymentMethod = styled.div`
   font-family: ${fonts.publicSans};
   font-weight: 100;
   letter-spacing: -2px;
+  text-align: right;
+
+  @media (max-width: 425px) {
+    font-size: 20px;
+  }
 `;
 
 export const LoadingGif = styled.img.attrs(() => ({ src: '/loading.gif' }))`
- width: 25px;
+  width: 25px;
   margin-left: 10px;
 `;

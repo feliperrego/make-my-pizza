@@ -13,5 +13,14 @@ export const SuccessContainer = styled.div`
 export const Title = styled.h2`
   font-size: 30px;
   font-family: ${fonts.publicSans};
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  padding: 60px;
+
+  @media(max-width: 768px) {
+    text-align: center;
+  }
+  
+  @media(max-width: 425px) {
+    padding: 40px
+  }
 `;

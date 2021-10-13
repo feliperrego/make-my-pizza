@@ -10,11 +10,24 @@ interface MenuContainerProps {
 
 export const MenuContainer = styled.nav<MenuContainerProps>`
   height: 100%;
+  
+  @media(max-width: 768px) {
+    li {
+      flex-direction: column;
+
+      div[class*=ExtraInfo] {
+        text-align: center;
+      }
+    }
+    a {
+      justify-content: center;
+    }  
+  }  
 
   ${({ menuType }) => menuType === 'pick' && css`
     ul {
       justify-content: center;
-      padding-left: 60px;
+      padding: 0 60px;
     }
 
     li {
@@ -22,6 +35,7 @@ export const MenuContainer = styled.nav<MenuContainerProps>`
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      flex-direction: row;
       
       div[class*=ExtraInfo] {
         margin-left: 20px;
@@ -53,7 +67,7 @@ export const MenuList = styled.ul`
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
-  width: max(35%, 360px);
+  width: max(35%, 390px);
 
   @media (max-width: 768px) {
     width: 100%;
@@ -73,7 +87,6 @@ export const MenuItem = styled.li<MenuItemProps>`
   list-style: none;
   width: 100%;
   text-align: right;
-  //min-width: 350px;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
 
   ${({ active }) => active && css`
@@ -89,11 +102,7 @@ export const MenuItem = styled.li<MenuItemProps>`
   `};
 
   @media (max-width: 768px) {
-    display: none;
-
-    ${({ active }) => active && css`
-      display: block !important;
-    `};
+    display: ${({ disabled }) => (disabled ? 'none !important' : 'flex')};
   }
 `;
 
@@ -135,4 +144,8 @@ export const ExtraInfoItem = styled.span`
   font-weight: 700;
   letter-spacing: -2px;
   margin-top: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 30px;
+  }
 `;

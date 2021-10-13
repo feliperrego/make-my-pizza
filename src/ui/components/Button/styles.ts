@@ -37,7 +37,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
   padding: 6px 33px;
   justify-content: center;
   font-size: 30px;
-  //height: 50px;
 
   &:hover {
     opacity: .93;
@@ -56,5 +55,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
     height: 36px;
     margin: 0;
     padding: 0;
+  }
+  
+  @media(max-width: 425px) {
+    font-size: 20px;
   }
 `;
