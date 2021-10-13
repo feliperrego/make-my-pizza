@@ -1,3 +1,6 @@
+import api from '@services/api';
+import { AxiosPromise } from 'axios';
+
 export interface PizzaOptions {
   flavor: string;
   dough: string;
@@ -19,3 +22,5 @@ export interface OrderData {
   user: User,
   order: Order
 }
+
+export const getPrice = (pizzaValues: PizzaOptions): AxiosPromise<{ value: number }> => api.post('price', pizzaValues);

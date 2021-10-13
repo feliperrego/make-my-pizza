@@ -7,9 +7,8 @@ import PizzaDough, { DoughOption } from '@ui/components/PizzaDough';
 import PizzaSize, { SizeOption } from '@ui/components/PizzaSize';
 import OrderForm from '@ui/components/OrderForm';
 import { usePizza } from '@hooks/usePizza';
-import {
-  getDoughs, getFlavors, getPrice, getSizes,
-} from '@services/pizzas';
+import { useFetch } from '@hooks/useFetch';
+import { getPrice } from '@services/order';
 
 const MENU_ITEMS: MenuItem[] = [
   { id: 'flavor', title: 'Sabor' },
@@ -18,13 +17,10 @@ const MENU_ITEMS: MenuItem[] = [
   { id: 'order', title: 'Dados' },
 ];
 
-interface PageProps {
-  pizzas: PizzaOption[];
-  sizes: SizeOption[];
-  doughs: DoughOption[]
-}
-
-const MontarPedido: NextPage<PageProps> = ({ pizzas, sizes, doughs }) => {
+const MontarPedido: NextPage = () => {
+  const flavorsFetch = useFetch<PizzaOption[]>('flavors');
+  const doughFetch = useFetch<DoughOption[]>('doughs');
+  const sizesFetch = useFetch<SizeOption[]>('sizes');
   const [disabledMenuItems, setDisabledMenuItems] = useState<string[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>(MENU_ITEMS);
   const {
@@ -40,9 +36,9 @@ const MontarPedido: NextPage<PageProps> = ({ pizzas, sizes, doughs }) => {
     setMenuItems(items);
   };
 
-  const handleNextStep = (data: any) => {
+  const handleNextStep = (stepData: any) => {
     const { pizza } = orderData;
-    handleOrderData({ ...orderData, pizza: { ...pizza, ...data } });
+    handleOrderData({ ...orderData, pizza: { ...pizza, ...stepData } });
     nextStep();
   };
 
@@ -55,9 +51,9 @@ const MontarPedido: NextPage<PageProps> = ({ pizzas, sizes, doughs }) => {
   };
 
   const steps: { [key: string]: ReactElement } = {
-    flavor: <PizzaFlavor options={pizzas} onSelect={handleNextStep} />,
-    dough: <PizzaDough options={doughs} onSelect={handleNextStep} />,
-    size: <PizzaSize options={sizes} onSelect={handleNextStep} />,
+    flavor: <PizzaFlavor options={flavorsFetch.data} onSelect={handleNextStep} />,
+    dough: <PizzaDough options={doughFetch.data} onSelect={handleNextStep} />,
+    size: <PizzaSize options={sizesFetch.data} onSelect={handleNextStep} />,
     order: <OrderForm onSubmit={handleSubmitOrder} />,
   };
 
@@ -91,13 +87,6 @@ const MontarPedido: NextPage<PageProps> = ({ pizzas, sizes, doughs }) => {
       {steps[step]}
     </Layout>
   );
-};
-
-export const getServerSideProps: GetStaticProps = async () => {
-  const pizzas = await getFlavors();
-  const sizes = await getSizes();
-  const doughs = await getDoughs();
-  return { props: { pizzas, sizes, doughs } };
 };
 
 export default MontarPedido;

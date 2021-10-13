@@ -10,7 +10,7 @@ export interface DoughOption {
 
 export interface PizzaDoughProps {
   onSelect?: (value: {dough: string}) => void;
-  options: DoughOption[];
+  options?: DoughOption[];
 }
 
 const PizzaDough: React.FC<PizzaDoughProps> = ({ onSelect, options }) => {

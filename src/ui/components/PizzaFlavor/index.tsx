@@ -11,7 +11,7 @@ export interface PizzaOption {
 }
 
 interface PizzaFlavor {
-  options: PizzaOption[],
+  options?: PizzaOption[],
   onSelect?: (value: {flavor: string}) => void;
 }
 
@@ -19,8 +19,11 @@ const PizzaFlavor: React.FC<PizzaFlavor> = ({ options, onSelect }) => {
   const [inactive, setInactive] = useState<string[]>([]);
 
   const activate = (id: string) => {
-    const inactivePizzas = options.filter((pizza) => pizza.id !== id);
-    setInactive(inactivePizzas.map((pizza) => pizza.id));
+    const inactivePizzas = options?.filter((pizza) => pizza.id !== id);
+
+    if (inactivePizzas) {
+      setInactive(inactivePizzas.map((pizza) => pizza.id));
+    }
   };
 
   const isInactive = (id: string): boolean => inactive.includes(id);

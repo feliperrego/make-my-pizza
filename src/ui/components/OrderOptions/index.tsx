@@ -1,9 +1,11 @@
 import React from 'react';
 import { currencyFormat } from '@utils/currency';
-import { OrderOptionsContainer, OrderValue, OrderPaymentMethod } from './styles';
+import {
+  OrderOptionsContainer, OrderValue, OrderPaymentMethod, LoadingGif,
+} from './styles';
 
 interface OrderOptionsProps {
-  value: number;
+  value?: number;
 }
 
 const OrderOptions: React.FC<OrderOptionsProps> = ({ value }) => (
@@ -11,7 +13,7 @@ const OrderOptions: React.FC<OrderOptionsProps> = ({ value }) => (
     <OrderValue>
       Preço:
       {' '}
-      {currencyFormat(value)}
+      {value ? currencyFormat(value) : <LoadingGif /> }
     </OrderValue>
     <OrderPaymentMethod>(pagar na entrega)</OrderPaymentMethod>
   </OrderOptionsContainer>

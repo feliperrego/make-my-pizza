@@ -8,7 +8,7 @@ export interface SizeOption {
 
 export interface PizzaSizeProps {
   onSelect?: (value: {size: string}) => void;
-  options: SizeOption[];
+  options?: SizeOption[];
 }
 
 const PizzaSize: React.FC<PizzaSizeProps> = ({ onSelect, options }) => {

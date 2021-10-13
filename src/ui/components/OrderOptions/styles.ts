@@ -22,3 +22,8 @@ export const OrderPaymentMethod = styled.div`
   font-weight: 100;
   letter-spacing: -2px;
 `;
+
+export const LoadingGif = styled.img.attrs(() => ({ src: '/loading.gif' }))`
+ width: 25px;
+  margin-left: 10px;
+`;
