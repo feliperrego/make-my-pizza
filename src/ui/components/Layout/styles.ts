@@ -39,6 +39,7 @@ export const BackButton = styled(Button)`
   color: ${colors.primary};
   font-size: 15px;
   text-transform: uppercase;
+  padding: 10px 0;
   
   &:hover {
    opacity: 0.6;
