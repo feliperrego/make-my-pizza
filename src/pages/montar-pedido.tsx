@@ -9,6 +9,7 @@ import OrderForm from '@ui/components/OrderForm';
 import { usePizza } from '@hooks/usePizza';
 import { useFetch } from '@hooks/useFetch';
 import SuccessMessage from '@ui/components/SuccessMessage';
+import { useRouter } from 'next/router';
 
 const MENU_ITEMS: MenuItem[] = [
   { id: 'flavor', title: 'Sabor' },
@@ -18,13 +19,14 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 const MontarPedido: NextPage = () => {
+  const router = useRouter();
   const flavorsFetch = useFetch<PizzaOption[]>('flavors');
   const doughFetch = useFetch<DoughOption[]>('doughs');
   const sizesFetch = useFetch<SizeOption[]>('sizes');
   const [disabledMenuItems, setDisabledMenuItems] = useState<string[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>(MENU_ITEMS);
   const {
-    step, handleStep, setStepKeys, nextStep, handleOrderData, orderData,
+    step, handleStep, setStepKeys, nextStep, handleOrderData, orderData, stepKeys,
   } = usePizza();
 
   const setMenuExtraInfo = () => {
@@ -62,6 +64,12 @@ const MontarPedido: NextPage = () => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      if (router.query.step) {
+        handleStep(router.query.step as string);
+        router.replace('/montar-pedido', undefined, { shallow: true });
+      }
+    }, 500);
     setStepKeys(Object.keys(steps));
   }, [setStepKeys]);
 
@@ -75,14 +83,18 @@ const MontarPedido: NextPage = () => {
 
   return (
     <Layout title="Monte sua Pizza">
-      <Menu
-        menuType="pick"
-        activeItem={step}
-        menuItems={menuItems}
-        onClick={handleStep}
-        disabledItems={disabledMenuItems}
-      />
-      {steps[step]}
+      {!router.query.step && (
+        <>
+          <Menu
+            menuType="pick"
+            activeItem={step}
+            menuItems={menuItems}
+            onClick={handleStep}
+            disabledItems={disabledMenuItems}
+          />
+          {steps[step]}
+        </>
+      )}
     </Layout>
   );
 };

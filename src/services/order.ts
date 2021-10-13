@@ -18,9 +18,9 @@ export interface Order {
 }
 
 export interface OrderData {
-  pizza: PizzaOptions,
-  user: User,
-  order: Order
+  pizza?: PizzaOptions,
+  user?: User,
+  order?: Order
 }
 
-export const getPrice = (pizzaValues: PizzaOptions): AxiosPromise<{ value: number }> => api.post('price', pizzaValues);
+export const getPrice = (pizzaValues?: PizzaOptions): AxiosPromise<{ value: number }> => api.post('price', pizzaValues);
