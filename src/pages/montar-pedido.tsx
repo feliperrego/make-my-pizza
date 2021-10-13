@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import type { GetStaticProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 import Layout from '@ui/components/Layout';
 import Menu, { MenuItem } from '@ui/components/Menu';
 import PizzaFlavor, { PizzaOption } from '@ui/components/PizzaFlavor';
@@ -8,7 +8,7 @@ import PizzaSize, { SizeOption } from '@ui/components/PizzaSize';
 import OrderForm from '@ui/components/OrderForm';
 import { usePizza } from '@hooks/usePizza';
 import { useFetch } from '@hooks/useFetch';
-import { getPrice } from '@services/order';
+import SuccessMessage from '@ui/components/SuccessMessage';
 
 const MENU_ITEMS: MenuItem[] = [
   { id: 'flavor', title: 'Sabor' },
@@ -42,12 +42,9 @@ const MontarPedido: NextPage = () => {
     nextStep();
   };
 
-  const handleSubmitOrder = async (values: any) => {
-    console.log(values);
-    console.log(orderData);
-
-    const price = await getPrice(orderData.pizza);
-    console.log(price);
+  const handleSubmitOrder = (values: any) => {
+    handleOrderData(values);
+    handleStep('success');
   };
 
   const steps: { [key: string]: ReactElement } = {
@@ -55,6 +52,7 @@ const MontarPedido: NextPage = () => {
     dough: <PizzaDough options={doughFetch.data} onSelect={handleNextStep} />,
     size: <PizzaSize options={sizesFetch.data} onSelect={handleNextStep} />,
     order: <OrderForm onSubmit={handleSubmitOrder} />,
+    success: <SuccessMessage />,
   };
 
   const updateDisabledItems = () => {

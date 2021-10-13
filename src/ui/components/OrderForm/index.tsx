@@ -5,6 +5,8 @@ import OrderOptions from '@ui/components/OrderOptions';
 import Button from '@ui/components/Button';
 import { getPrice } from '@services/order';
 import { usePizza } from '@hooks/usePizza';
+import * as Yup from 'yup';
+import { isValidSchema } from '@utils/errors';
 import Form from '../Form';
 import { OrderFormContainer } from './styles';
 
@@ -15,18 +17,39 @@ interface OrderFormProps {
 const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
   const formRef = useRef<FormHandles>(null);
   const { orderData } = usePizza();
-  const [totalPrice, setTotalPrice] = useState<number>();
+  const [totalValue, setTotalValue] = useState<number>();
+
+  const schema = Yup.object().shape({
+    name: Yup.string().required('Este é um campo obrigatório'),
+    address: Yup.string().required('Este é um campo obrigatório'),
+  });
 
   useEffect(() => {
     (async () => {
       const price = await getPrice(orderData.pizza);
-      setTotalPrice(price?.data?.value);
+      setTotalValue(price?.data?.value);
     })();
-  }, [orderData, setTotalPrice]);
+  }, [orderData, setTotalValue]);
 
   const handleSubmit: SubmitHandler = async (values) => {
-    if (onSubmit) {
-      onSubmit(values);
+    const formValues = formRef.current?.getData();
+    const { isValid, validationErrors } = await isValidSchema(schema, formValues);
+
+    if (isValid) {
+      formRef.current?.setErrors({});
+
+      if (onSubmit) {
+        onSubmit({
+          ...orderData,
+          user: values,
+          order: {
+            totalValue: totalValue || 0,
+            paymentType: 'pagamento da entrega',
+          },
+        });
+      }
+    } else {
+      formRef.current?.setErrors(validationErrors);
     }
   };
 
@@ -48,7 +71,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSubmit }) => {
           autoFocus
         />
 
-        <OrderOptions value={totalPrice} />
+        <OrderOptions value={totalValue} />
 
         <Button color="primary" width="100%">Finalizar Pedido</Button>
       </Form>
