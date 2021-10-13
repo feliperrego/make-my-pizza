@@ -3,8 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { body, method } = req;
 
-  console.log(body);
-
   const pricesTable = {
     flavor: [
       { value: 15, options: ['Marguerita', 'Portuguesa'] },
@@ -30,7 +28,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case 'POST':
-      // Get data from your database
       res.status(200).json({ value });
       break;
     default:

@@ -12,7 +12,7 @@ export default styled.span<Props>`
   font-size: ${({ size }) => (size || 13)}px;
   font-weight: 400;
   line-height: 18px;
-  color: ${colors.primary};
+  color: ${colors.error};
 
   @media(max-width: 768px) {
     font-size: ${({ mobileSize }) => (mobileSize || 13)}px;
