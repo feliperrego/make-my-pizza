@@ -10,7 +10,9 @@ export const isValidSchema = async (schema: AnySchema<unknown>, values: unknown)
   } catch (err) {
     if (err instanceof ValidationError) {
       err.inner.forEach((error) => {
-        validationErrors[error.path] = error.message;
+        if (error?.path) {
+          (validationErrors as any)[error.path] = error.message;
+        }
       });
       isValid = false;
     }
